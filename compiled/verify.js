@@ -46,12 +46,13 @@ var verify_moves = /** @class */ (function (_super) {
             this.attack_moves.end_obj = end_obj;
         }
         if (mode) {
-            this.verify_result = ((this.figure == 'pawn' && this.pawn()) ||
+            this.verify_result = (((this.figure == 'pawn' && this.pawn()) ||
                 (this.figure == 'knight' && this.knight()) ||
                 (this.figure == 'bishop' && this.bishop()) ||
                 (this.figure == 'rook' && this.rook()) ||
                 (this.figure == 'queen' && this.queen()) ||
-                (this.figure == 'king' && this.king())) ? this.verify_eat_figures() : false;
+                (this.figure == 'king' && this.king())) &&
+                (!this.move_king.attack)) ? this.verify_eat_figures() : false;
             this.result_verify_move();
         }
         else {
@@ -60,7 +61,7 @@ var verify_moves = /** @class */ (function (_super) {
                 || (this.figure == 'rook' && this.attack_moves.rook())
                 || (this.figure == 'queen' && this.attack_moves.queen())
                 || (this.figure == 'king' && this.attack_moves.king())
-                || (this.figure == 'pawn' && this.attack_moves.king())) {
+                || (this.figure == 'pawn' && this.attack_moves.pawn())) {
                 return true;
             }
         }
@@ -88,13 +89,21 @@ var verify_moves = /** @class */ (function (_super) {
     };
     verify_moves.prototype.verify_attack = function () {
         if (this.verify_move(this.opposite_king)) {
+            this.opposite_king.attack = true;
+            this.opposite_king.square.style.background = 'red';
             console.log('true');
+        }
+        else {
+            this.opposite_king.attack = false;
         }
     };
     verify_moves.prototype.find_king = function () {
         for (var i = 0; i < Cords.sq.length; i++) {
-            if (Cords.sq[i].piece && Cords.sq[i].piece.classList[1] == 'king' && Cords.sq[i].color != this.move_color) {
-                this.opposite_king = Cords.sq[i];
+            if (Cords.sq[i].piece && Cords.sq[i].piece.classList[1] == 'king') {
+                if (Cords.sq[i].color != this.move_color)
+                    this.opposite_king = Cords.sq[i];
+                else
+                    this.move_king = Cords.sq[i];
             }
         }
     };

@@ -17,7 +17,8 @@ var Cords = /** @class */ (function () {
                 color: color,
                 square: dec.squares[i],
                 width: dec.squares[i].getBoundingClientRect().width,
-                height: dec.squares[i].getBoundingClientRect().height
+                height: dec.squares[i].getBoundingClientRect().height,
+                attack: false
             };
         }
     };
@@ -35,9 +36,9 @@ var Cords = /** @class */ (function () {
     };
     //update cords
     Cords.updatecords = function (obj, x, y) {
-        var tmp = this.getcords(x, y);
-        tmp.piece = obj.piece;
-        tmp.color = obj.color;
+        var under_obj = this.getcords(x, y);
+        under_obj.piece = obj.piece;
+        under_obj.color = obj.color;
         obj.piece = null;
         obj.color = null;
     };

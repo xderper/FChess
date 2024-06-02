@@ -13,6 +13,7 @@ export default class Cords {
         width: number;
         height: number;
         color: any;
+        attack: boolean;
 
     }>;
     // fill array
@@ -32,7 +33,8 @@ export default class Cords {
                 color: color,
                 square: dec.squares[i] as HTMLElement,
                 width: dec.squares[i].getBoundingClientRect().width,
-                height: dec.squares[i].getBoundingClientRect().height
+                height: dec.squares[i].getBoundingClientRect().height,
+                attack: false
             };
 
         }
@@ -54,9 +56,9 @@ export default class Cords {
     }
     //update cords
     public static updatecords(obj, x, y) {
-        let tmp: any = this.getcords(x, y);
-        tmp.piece = obj.piece;
-        tmp.color = obj.color;
+        let under_obj: any = this.getcords(x, y);
+        under_obj.piece = obj.piece;
+        under_obj.color = obj.color;
         obj.piece = null;
         obj.color = null;
     }

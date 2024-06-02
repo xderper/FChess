@@ -1,3 +1,1 @@
-import Cords from './cords.js';
-
-console.log(Cords.getcords(1185, 475), Cords.getcords(1186.5, 461.5))
+if (this.move_color == this.opposite_king.color && this.opp)

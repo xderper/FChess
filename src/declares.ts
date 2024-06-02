@@ -10,6 +10,11 @@ export type steps = {
     y_step: number;
 }
 
+export type cords_sign ={
+    x: number;
+    y: number
+}
+
 export class declares {
     public static readonly desk_length: number = 8; // - desk amount of columns and rows
     public static readonly pieces: any = document.getElementsByClassName('piece'); // - figures on desk

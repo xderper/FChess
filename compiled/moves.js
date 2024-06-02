@@ -13,10 +13,12 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
+// imports
 import Cords from './cords.js';
 import { declares as dec } from './declares.js';
 var moves = /** @class */ (function () {
-    function moves(square, start, end) {
+    function moves(square, start, // - start cords of moving object
+    end) {
         this.square = square;
         this.start = start;
         this.end = end;
