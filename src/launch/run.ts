@@ -1,5 +1,5 @@
-import Cords from './cords.js'
-import Main from './app.js'
+import Cords from '../cords.js'
+import Main from '../app.js'
 
 
 function main() {

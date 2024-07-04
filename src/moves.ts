@@ -1,6 +1,6 @@
 // imports
 import Cords from './cords.js'
-import { cords, steps, declares as dec, cords_sign } from './declares.js';
+import { cords, steps, declares as dec, cords_sign } from './launch/declares.js';
 
 
 export default class moves {

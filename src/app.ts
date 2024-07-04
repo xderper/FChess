@@ -1,7 +1,7 @@
 // Import necessary modules and classes
 import Cords from './cords.js';
 import Moves from './moves.js';
-import { cords, declares as dec } from './declares.js'
+import { cords, declares as dec } from './launch/declares.js'
 import Verify from './verify.js';
 
 

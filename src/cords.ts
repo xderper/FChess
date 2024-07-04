@@ -1,6 +1,6 @@
 // imports
 import Main from "./app.js";
-import {declares as dec, cords} from "./declares.js"
+import {declares as dec, cords} from "./launch/declares.js"
 
 
 export default class Cords {

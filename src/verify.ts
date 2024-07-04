@@ -1,6 +1,6 @@
 import moves, { attack_moves } from './moves.js';
 import Cords from './cords.js'
-import { cords } from './declares.js';
+import { cords } from './launch/declares.js';
 import Main from './app.js'
 
 

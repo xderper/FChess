@@ -1,1 +1,0 @@
-if (this.move_color == this.opposite_king.color && this.opp)
