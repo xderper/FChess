@@ -1,6 +1,6 @@
 // Import necessary modules and classes
 import Cords from './cords.js';
-import { declares as dec } from './declares.js';
+import { declares as dec } from './launch/declares.js';
 import Verify from './verify.js';
 var Main = /** @class */ (function () {
     function Main() {
@@ -28,29 +28,28 @@ var Main = /** @class */ (function () {
         }
     };
     // Private method to indicate the starting move of a piece
-    Main.prototype.start_indicate_move = function () {
-        // Get the starting square of the piece
-        var start_obj = Cords.getcords(this.start_cords.x, this.start_cords.y);
-        // Set the background color of the starting square to lime
-        start_obj.square.style.background = 'lime';
-    };
-    // Private method to indicate the current move of a piece
-    Main.prototype.indicate_move = function () {
-        // Fill the colors of the board
-        this.fill_colors();
-        // Get the current square of the piece
-        var under_move_obj = Cords.getcords(this.tracking_cords.x, this.tracking_cords.y);
-        // If the piece has moved, set the background color of the current square to green
-        if (!Cords.equality(this.tracking_cords, this.start_cords))
-            under_move_obj.square.style.background = 'green';
-    };
+    // private start_indicate_move() {
+    //     // Get the starting square of the piece
+    //     const start_obj: any = Cords.getcords(this.start_cords.x, this.start_cords.y);
+    //     // Set the background color of the starting square to lime
+    //     start_obj.square.style.background = 'lime';
+    // }   
+    // // Private method to indicate the current move of a piece
+    // private indicate_move(): void {
+    //     // Fill the colors of the board
+    //     this.fill_colors();
+    //     // Get the current square of the piece
+    //     const under_move_obj: any = Cords.getcords(this.tracking_cords.x, this.tracking_cords.y);
+    //     // If the piece has moved, set the background color of the current square to green
+    //     if (!Cords.equality(this.tracking_cords, this.start_cords)) under_move_obj.square.style.background = 'green';
+    // }
     // Private method to handle the mouse up event of a piece
     Main.prototype.OnMouseUp = function (square, piece) {
         // Create a new Verify object to verify the move
         var verify = new Verify(square, this.start_cords, this.tracking_cords);
         // Verify the move
-        verify.verify_attack();
-        verify.verify_move(Cords.getcords(this.tracking_cords.x, this.tracking_cords.y), true);
+        verify.primary_move();
+        verify.primary_attack();
         // Reset the event handlers of the piece
         piece.onmousemove = null;
         piece.onmouseup = null;
@@ -65,7 +64,7 @@ var Main = /** @class */ (function () {
         this.tracking_cords.x = event.pageX - this.width / 2;
         this.tracking_cords.y = event.pageY - this.width / 2;
         // Indicate the current move of the piece
-        this.indicate_move();
+        // this.indicate_move();
         // Move the piece to the new position
         this.move_to(square, this.tracking_cords.x, this.tracking_cords.y);
     };
@@ -90,7 +89,7 @@ var Main = /** @class */ (function () {
                     piece.style.position = 'absolute';
                     document.body.append(piece);
                     self.move_to(Cords.sq[i], event.clientX - self.width / 2, event.clientY - self.width / 2);
-                    self.start_indicate_move();
+                    // self.start_indicate_move();
                     piece.onmousemove = function (event) { self.OnMouseMove(Cords.sq[i], event); };
                     piece.onmouseup = function (event) { self.OnMouseUp(Cords.sq[i], piece); };
                 };
@@ -103,6 +102,7 @@ var Main = /** @class */ (function () {
             _loop_1(i);
         }
     };
+    Main.motion_count = 0;
     return Main;
 }());
 export default Main;

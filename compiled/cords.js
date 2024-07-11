@@ -1,4 +1,4 @@
-import { declares as dec } from "./declares.js";
+import { declares as dec } from "./launch/declares.js";
 var Cords = /** @class */ (function () {
     function Cords() {
     }

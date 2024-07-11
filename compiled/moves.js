@@ -15,7 +15,7 @@ var __extends = (this && this.__extends) || (function () {
 })();
 // imports
 import Cords from './cords.js';
-import { declares as dec } from './declares.js';
+import { declares as dec } from './launch/declares.js';
 var moves = /** @class */ (function () {
     function moves(square, start, // - start cords of moving object
     end) {

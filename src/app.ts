@@ -13,15 +13,17 @@ export default class Main {
     // Private property to store the width of a square on the board
     private readonly width: number = Cords.sq[0].width;
 
+    public static motion_count : number = 0;
+
     // Private method to move a piece to a new position on the board
-    private move_to(square: any, x: number, y: number): void {
+    public move_to(square: any, x: number, y: number): void {
         // Update the left and top CSS properties of the piece to move it to the new position
         square.piece.style.left = x + 'px';
         square.piece.style.top = y + 'px';
     }
 
     // Private method to set the background color of each square on the board
-    private fill_colors(mode: boolean = false, start_cords: cords = this.start_cords, tracking_cords: cords = this.tracking_cords): void {
+    public fill_colors(mode: boolean = false, start_cords: cords = this.start_cords, tracking_cords: cords = this.tracking_cords): void {
         // Loop through each square on the board
         for (let i = 0; i < Cords.sq.length; i++) {
             const square: any = Cords.sq[i].square;
@@ -33,22 +35,22 @@ export default class Main {
     }
 
     // Private method to indicate the starting move of a piece
-    private start_indicate_move() {
-        // Get the starting square of the piece
-        const start_obj: any = Cords.getcords(this.start_cords.x, this.start_cords.y);
-        // Set the background color of the starting square to lime
-        start_obj.square.style.background = 'lime';
-    }   
+    // private start_indicate_move() {
+    //     // Get the starting square of the piece
+    //     const start_obj: any = Cords.getcords(this.start_cords.x, this.start_cords.y);
+    //     // Set the background color of the starting square to lime
+    //     start_obj.square.style.background = 'lime';
+    // }   
 
-    // Private method to indicate the current move of a piece
-    private indicate_move(): void {
-        // Fill the colors of the board
-        this.fill_colors();
-        // Get the current square of the piece
-        const under_move_obj: any = Cords.getcords(this.tracking_cords.x, this.tracking_cords.y);
-        // If the piece has moved, set the background color of the current square to green
-        if (!Cords.equality(this.tracking_cords, this.start_cords)) under_move_obj.square.style.background = 'green';
-    }
+    // // Private method to indicate the current move of a piece
+    // private indicate_move(): void {
+    //     // Fill the colors of the board
+    //     this.fill_colors();
+    //     // Get the current square of the piece
+    //     const under_move_obj: any = Cords.getcords(this.tracking_cords.x, this.tracking_cords.y);
+    //     // If the piece has moved, set the background color of the current square to green
+    //     if (!Cords.equality(this.tracking_cords, this.start_cords)) under_move_obj.square.style.background = 'green';
+    // }
 
     // Private method to handle the mouse up event of a piece
     private OnMouseUp(square: any, piece: any) {
@@ -60,8 +62,8 @@ export default class Main {
         );
 
         // Verify the move
-        verify.verify_attack();
-        verify.verify_move(Cords.getcords(this.tracking_cords.x, this.tracking_cords.y), true);
+        verify.primary_move();
+        verify.primary_attack();
 
         // Reset the event handlers of the piece
         piece.onmousemove = null;
@@ -81,7 +83,7 @@ export default class Main {
         this.tracking_cords.y = event.pageY - this.width / 2;
 
         // Indicate the current move of the piece
-        this.indicate_move();
+        // this.indicate_move();
 
         // Move the piece to the new position
         this.move_to(square, this.tracking_cords.x, this.tracking_cords.y);
@@ -111,7 +113,7 @@ export default class Main {
                     document.body.append(piece);
 
                     self.move_to(Cords.sq[i], event.clientX - self.width / 2, event.clientY - self.width / 2);
-                    self.start_indicate_move();
+                    // self.start_indicate_move();
 
                     piece.onmousemove = function (event: MouseEvent) { self.OnMouseMove(Cords.sq[i], event) }
                     piece.onmouseup = function (event: MouseEvent) { self.OnMouseUp(Cords.sq[i], piece) }
